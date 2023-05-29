@@ -254,6 +254,11 @@ BSD 2-Clause License.
 
 libmguard is devloped and maintained by Matt Doza.
 
+*** How do you use libmguard?
+
+I would love to hear how you use libmguard. If you have the time, please send me
+an email about how you use libmguard. Reach me at [[mailto:mdoza@me.com][mdoza@me.com]].
+
 ** Support
 
 If you encounter any issues while using libmguard or have questions regarding its
@@ -266,9 +271,9 @@ usage, there are several ways to seek support:
 
 - Email
 
-  You can also reach out to me via email at =mdoza= =(at)= =me.com= for any
+  You can also reach out to me via email at [[mailto:mdoza@me.com][mdoza@me.com]] for any
   specific inquiries or support needs.
-
+p
 When reaching out for support or reporting an issue, please provide as much
 detail as possible, including steps to reproduce the problem, relevant code
 snippets, and any error messages you encountered. This will help me better
@@ -276,7 +281,7 @@ understand and address your concerns in a timely manner.
 
 Note: If you believe you have found a security vulnerability or a critical issue
 that requires immediate attention, please send me an email at
-=mdoza= =(at)= =me.com=.
+[[mailto:mdoza@me.com][mdoza@me.com]].
 
 ** Changelog
 
