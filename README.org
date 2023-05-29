@@ -273,7 +273,7 @@ usage, there are several ways to seek support:
 
   You can also reach out to me via email at [[mailto:mdoza@me.com][mdoza@me.com]] for any
   specific inquiries or support needs.
-p
+
 When reaching out for support or reporting an issue, please provide as much
 detail as possible, including steps to reproduce the problem, relevant code
 snippets, and any error messages you encountered. This will help me better
