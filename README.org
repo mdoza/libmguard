@@ -4,7 +4,7 @@
 
 ** About libmguard
 
-libmguard is a powerful software library designed to safeguard the integrity of
+libmguard is a small software library designed to safeguard the integrity of
 critical data stored in computer memory. It acts as a digital guardian, ensuring
 that your valuable information remains safe and unchanged, even in challenging
 environments.
@@ -116,6 +116,9 @@ Using the =PREFIX= environment variable is also used during uninstall.
 #+END_SRC
 
 ** Using libmguard
+
+libmguard is small and quick and very easy to use. Dropping libmguard into an
+existing project should be quite easy.
 
 The concept behind libmguard starts with creating an =MGContext= to register
 memory you wish to protect. After creating a context you can register memory
