@@ -1,0 +1,284 @@
+* libmguard
+
+/Protecting your data, securing your software./
+
+** About libmguard
+
+libmguard is a powerful software library designed to safeguard the integrity of
+critical data stored in computer memory. It acts as a digital guardian, ensuring
+that your valuable information remains safe and unchanged, even in challenging
+environments.
+
+Whether you're a developer building security software or working with sensitive
+data, libmguard offers essential protection against unauthorized modifications.
+By creating a secure context and specifying which memory areas to safeguard,
+libmguard calculates unique digital fingerprints, or hashes, for those memory
+regions.
+
+These hashes serve as a reference point, allowing you to periodically check if
+any unauthorized changes have occurred. It's like having a digital lock on your
+data, ensuring that your information remains intact and unaltered.
+
+In addition to its security benefits, libmguard might also helpful with
+addressing faulty memory that can arise from environmental factors like extreme
+temperatures, humidity, electrostatic discharge, magnetic fields, radiation,
+vibration, and any other factor that may cause faulty memory. libmguard can act
+as an extra layer of defense against memory errors caused by these external
+influences, ensuring the reliability and stability of your software.
+
+libmguard may also be helpful in detecting race conditions, which can occur when
+multiple components or input devices interact simultaneously. By monitoring
+memory integrity, it helps prevent conflicts and ensures smooth operations even
+in complex software systems.
+
+libmguard is an open-source project, meaning it's freely available for anyone to
+use and contribute to. Join our community of developers and take advantage of
+this memory protection library to enhance the security, reliability, and
+performance of your software applications.
+
+Protect your data, secure your software, and unlock the potential of libmguard
+today.
+
+** Getting Started
+
+libmguard is free software and is available for download from the official
+github repository [[https://github.com/mdoza/libmguard][here]].
+
+The easiest way to get started is to clone the libmguard repository.
+
+#+BEGIN_SRC text
+  $ git clone https://github.com/mdoza/libmguard
+#+END_SRC
+
+*** Building
+
+libmguard comes with a =Makefile= to assist with the building, installation,
+and testing.
+
+#+BEGIN_SRC text
+  $ make
+
+  build options:
+  CFLAGS = --std=c99
+  CC     = cc
+  PREFIX = /usr/local
+  cc --std=c99 -c libmguard.c -o libmguard.o
+  ar -cvq libmguard.a libmguard.o
+  q - libmguard.o
+#+END_SRC
+
+*** Installation
+
+The default =PREFIX= for installation is =/usr/local=. If you wish to have
+libmguard installed in a different location, ensure to set the =PREFIX=
+environment variable before installation.
+
+#+BEGIN_SRC text
+  $ make install
+
+  cp libmguard.h /usr/local/include/libmguard.h
+  cp libmguard.a /usr/local/lib/libmguard.a
+#+END_SRC
+
+As mentioned above, you can have libmguard installed in a different location by
+setting the =PREFIX= environment variable.
+
+#+BEGIN_SRC text
+  $ PREFIX=/usr make install
+
+  cp libmguard.h /usr/include/libmguard.h
+  cp libmguard.a /usr/lib/libmguard.a
+
+  $ PREFIX=$HOME make install
+
+  cp libmguard.h /home/matt/include/libmguard.h
+  cp libmguard.a /home/matt/lib/libmguard.a
+#+END_SRC
+
+*** Uninstall
+
+You can uninstall libmguard using the provided =Makefile=.
+
+#+BEGIN_SRC text
+  $ make uninstall
+
+  rm -fP /usr/local/include/libmguard.h
+  rm -fP /usr/local/lib/libmguard.a
+#+END_SRC
+
+Using the =PREFIX= environment variable is also used during uninstall.
+
+#+BEGIN_SRC text
+  $ PREFIX=/usr make uninstall
+
+  rm -fP /usr/include/libmguard.h
+  rm -fP /usr/lib/libmguard.a
+#+END_SRC
+
+** Using libmguard
+
+The concept behind libmguard starts with creating an =MGContext= to register
+memory you wish to protect. After creating a context you can register memory
+to protect by using =mg_protect=, and update memory with =mg_update=. You check
+if memory has kept its integrity with =mg_compromised_p=.
+
+*** Creating a MGContext
+
+#+BEGIN_SRC c
+  MGContext context;
+
+  if (!mg_init_context(&context)) {
+    // Handle context init error ...
+   }
+
+  // ...
+#+END_SRC
+
+*** Protecting Memory
+
+#+BEGIN_SRC c
+  int data = 34922;
+  MGContext context;
+
+  if (!mg_init_context(&context)) {
+    // Handle context init error ...
+  }
+
+  if (!mg_protect(&context, &data, sizeof(data))) {
+    // Handle protect error.
+  }
+#+END_SRC
+
+*** Check for Compromised Memory
+
+#+BEGIN_SRC c
+  int data = 34922;
+  MGContext context;
+
+  if (!mg_init_context(&context)) {
+    // Handle context init error ...
+  }
+
+  if (!mg_protect(&context, &data, sizeof(data))) {
+    // Handle protect error.
+  }
+
+  if (mg_compromised_p(&context, &data)) {
+    // Memory compromised.
+    // Handle what to do when this happens.
+    // ...
+  } else {
+    // Otherwise, memory has not been compromised.
+    // ...
+  }
+#+END_SRC
+
+*** Update Protected Memory
+
+#+BEGIN_SRC c
+  int data = 34922;
+  MGContext context;
+
+  if (!mg_init_context(&context)) {
+    // Handle context init error ...
+  }
+
+  if (!mg_protect(&context, &data, sizeof(data))) {
+    // Handle protect error.
+  }
+
+  if (mg_compromised_p(&context, &data)) {
+    // Memory compromised.
+    // Handle what to do when this happens.
+    // ...
+  } else {
+    // Otherwise, memory has not been compromised.
+    // ...
+  }
+
+  data = 31337;
+  mg_update(&context, &data);
+#+END_SRC
+
+** Contributing
+
+I would love to have you contribute to libmguard. Your support and contributions
+to the code base are very much welcome.
+
+Whether you are an experienced developer or just starting out, there are various
+ways you can contribute. You can:
+
+1. Submit Bug Reports
+
+   Help identify and address any issues or bugs you encounter while using
+   libmguard. Detailed bug reports are immensely helpful in improving the
+   library.
+
+2. Propose New Features
+
+   Have a great idea for enhancing libmguard? I want to hear about it! Please
+   share your suggestions for new features or improvements.
+
+3. Contribute Code
+
+   Check out the codebase, and see what can be optimized, simplified, or just
+   improved overall.
+
+4. Documentation and Examples
+
+   Improve the documentation to make it more comprehensive and user-friendly.
+   You can also contribute examples and tutorials to help fellow developers
+   understand and utilize libmguard effectively.
+
+5. Spread the Word
+
+   Help us reach a wider audience by sharing your experiences with libmguard.
+
+Remember, contributing to libmguard is not limited to the above suggestions. If
+you have any other ideas or contributions in mind, I would love to hear about it.
+
+** License
+
+libmguard is released under the BSD 2-Clause License. The full text of the
+license can be found in the LICENSE file.
+
+The BSD 2-Clause License is a permissive open-source license that allows you to
+freely use, modify, and distribute the libmguard library, both for commercial and
+non-commercial purposes. It grants you the freedom to incorporate libmguard into
+your own projects without imposing significant restrictions.
+
+Please refer to the LICENSE file for the complete terms and conditions of the
+BSD 2-Clause License.
+
+** Author
+
+libmguard is devloped and maintained by Matt Doza.
+
+** Support
+
+If you encounter any issues while using libmguard or have questions regarding its
+usage, there are several ways to seek support:
+
+- GitHub Issues
+
+  Feel free to open an issue on the project's GitHub repository. This is a great
+  way to report bugs, suggest enhancements, or ask questions related to libmguard.
+
+- Email
+
+  You can also reach out to me via email at =mdoza= =(at)= =me.com= for any
+  specific inquiries or support needs.
+
+When reaching out for support or reporting an issue, please provide as much
+detail as possible, including steps to reproduce the problem, relevant code
+snippets, and any error messages you encountered. This will help me better
+understand and address your concerns in a timely manner.
+
+Note: If you believe you have found a security vulnerability or a critical issue
+that requires immediate attention, please send me an email at
+=mdoza= =(at)= =me.com=.
+
+** Changelog
+
+- 2023/05/28 - libmguard is released as free software.
+
