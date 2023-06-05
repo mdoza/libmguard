@@ -288,6 +288,5 @@ that requires immediate attention, please send me an email at
 
 ** Changelog
 
-- 2023/05/28 - libmguard is released as free software.
 - 2023/06/04 - libmguard is now using its own small, simple testing framework.
-  
+- 2023/05/28 - libmguard is released as free software.
