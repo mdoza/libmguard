@@ -65,7 +65,7 @@ TEST(mg_hash_changes_with_data)
   doc("When the hash function should always return a different result when");
   doc("different data is asked to be hashed. Ensure the hash function is not");
   doc("returning the same hash for different data.");
-  
+
   int data = 31337;
   unsigned int hash = mg_hash((void *)&data, sizeof(data));
 
@@ -291,7 +291,7 @@ TEST(mg_compromised_p_returns_one_if_compromised)
   assert(mg_protect(&context, &data, sizeof(data)) == 1, "Variable 'data' should be added to the context as protected.");
 
   data = 34922;
-  
+
   assert(mg_compromised_p(&context, &data) == 1, "Data has been compromised, should return one (1).");
 }
 
@@ -305,7 +305,7 @@ TEST(mg_compromised_p_returns_one_if_not_protected)
   assert(mg_protect(&context, &data0, sizeof(data0)) == 1, "Variable 'data0' should be added to the context as protected.");
 
   data0 = 34922;
-  
+
   assert(mg_compromised_p(&context, &data1) == 1, "Treat data not being protected as compromised.");
 }
 
@@ -368,7 +368,7 @@ TEST(mg_stress_test)
       assert(mg_compromised_p(&mgc_accounts, &accounts[i]) > -1, "Account should be compromised.");
       assert(mg_update(&mgc_accounts, &accounts[i]) == sizeof(accounts[i]), "Update accounts.");
     }
-    
+
     if (!mg_compromised_p(&mgc_accounts, &accounts[from_acct]) &&
         !mg_compromised_p(&mgc_accounts, &accounts[to_acct]) &&
         !mg_compromised_p(&mgc_transfers, &transfers[i])) {
@@ -379,7 +379,7 @@ TEST(mg_stress_test)
       assert(mg_update(&mgc_accounts, &accounts[from_acct]) == sizeof(accounts[from_acct]), "Update from_acct.");
       assert(mg_update(&mgc_accounts, &accounts[to_acct]) == sizeof(accounts[to_acct]), "Update to_acct.");
     }
-  }  
+  }
 }
 
 int main()

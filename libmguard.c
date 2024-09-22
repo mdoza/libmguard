@@ -49,7 +49,7 @@ mg_protect(MGContext *context, void *data, size_t size)
     protected_variable.ptr = data;
     protected_variable.size = size;
     protected_variable.hash = hash;
- 
+
     // TODO: Maybe this should be its own function.
     if (context->used == context->size) {
       context->size += 1;
