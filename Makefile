@@ -1,6 +1,11 @@
 PREFIX = /usr/local
 CFLAGS = --std=c99
+UNAME = $(shell uname)
 RM = rm -fP
+
+ifeq ($(UNAME), Linux)
+  RM = rm -f
+endif
 
 all: opts libmguard
 
